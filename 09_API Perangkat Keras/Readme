@@ -1,0 +1,3 @@
+API perangkat keras adalah antarmuka pemrograman aplikasi yang memungkinkan perangkat lunak berinteraksi langsung dengan perangkat keras komputer. API ini menyediakan fungsi dan perintah yang dapat digunakan oleh pengembang untuk mengakses atau mengontrol perangkat keras tertentu, seperti prosesor, kartu grafis, sensor, atau perangkat input.
+
+Dengan API perangkat keras, pengembang tidak perlu mengakses perangkat keras secara langsung pada level rendah, melainkan dapat menggunakan perintah API yang telah dioptimalkan dan disederhanakan. Contohnya adalah OpenGL untuk pengolahan grafis, OpenCL untuk komputasi paralel di GPU, dan DirectX untuk pengolahan multimedia di Windows.
