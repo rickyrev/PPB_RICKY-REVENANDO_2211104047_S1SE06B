@@ -1,91 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_9/camera_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Latihan Memilih Gambar',
+      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: CameraScreen()
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Latihan Memilih Gambar'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Container untuk Icon gambar
-            Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 2.0),
-                borderRadius: BorderRadius.circular(8.0),
-                color: Colors.grey[200],
-              ),
-              child: Icon(
-                Icons.image_outlined,
-                size: 100,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 20),
-            // Row untuk tombol Camera dan Gallery
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Aksi tombol Camera (belum diimplementasikan)
-                  },
-                  icon: Icon(Icons.camera),
-                  label: Text('Camera'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow[800], // Warna tombol
-                  ),
-                ),
-                SizedBox(width: 10),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    // Aksi tombol Gallery (belum diimplementasikan)
-                  },
-                  icon: Icon(Icons.photo),
-                  label: Text('Gallery'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow[800],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            // Tombol Hapus Gambar
-            ElevatedButton(
-              onPressed: () {
-                // Aksi tombol Hapus Gambar (belum diimplementasikan)
-              },
-              child: Text('Hapus Gambar'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.yellow[800],
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+
+
+
+  
