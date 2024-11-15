@@ -1,43 +1,106 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_9/camera_screen.dart';
+// ignore: depend_on_referenced_packages
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pemilihan Gambar',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: CameraScreen()
+      home: ImagePickerExample(),
     );
   }
 }
 
+class ImagePickerExample extends StatefulWidget {
+  @override
+  _ImagePickerExampleState createState() => _ImagePickerExampleState();
+}
 
+class _ImagePickerExampleState extends State<ImagePickerExample> {
+  File? _image; // Untuk menyimpan gambar yang diambil
 
+  final ImagePicker _picker = ImagePicker();
 
-  
+  // Fungsi untuk mengambil gambar dari galeri
+  Future<void> _pickImageFromGallery() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  // Fungsi untuk mengambil gambar dari kamera
+  Future<void> _pickImageFromCamera() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  // Fungsi untuk menghapus gambar
+  void _removeImage() {
+    setState(() {
+      _image = null;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Pemilihan Gambar'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Container untuk menampilkan gambar
+          _image != null
+              ? Image.file(
+                  _image!,
+                  height: 300,
+                )
+              : Container(
+                  height: 300,
+                  color: Colors.grey[300],
+                  child: Icon(
+                    Icons.image,
+                    size: 100,
+                    color: Colors.grey[700],
+                  ),
+                ),
+          SizedBox(height: 20),
+          // Tombol untuk memilih gambar dari galeri, kamera, dan menghapus gambar
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: _pickImageFromGallery,
+                child: Text('Gallery'),
+              ),
+              ElevatedButton(
+                onPressed: _pickImageFromCamera,
+                child: Text('Camera'),
+              ),
+              ElevatedButton(
+                onPressed: _removeImage,
+                child: Text('Hapus Gambar'),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
